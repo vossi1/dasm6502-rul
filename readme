@@ -1,6 +1,9 @@
-dasm6502-rul.c
-removes unused labels in acme assembler source code
+rul.c
+removes unused labels from dasm6502b disassembling for acme
 written by Vossi 02/2019 in Hamburg/Germany
-version 1.0 copyright (c) 2019 Vossi. All rights reserved.
+version 1.1 copyright (c) 2019 Vossi. All rights reserved.
 
 removes all lxxxx: labels in first position of line, if no branch or jmp/jsr uses it.
+option -xab to replace all $xxxx addresses with lxxxx from $axxx - $bxxx
+
+DASM6502B is a special version which creates an ACME compatible disassembling!
