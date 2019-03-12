@@ -1,6 +1,6 @@
 // dasm6502-rul.c
 // removes unused labels from dasm6502a disassembling for acme reassembling
-// written by Vossi 02/2019 in Hamburg/Germany
+// written by Vossi 03/2019 in Hamburg/Germany
 // version 1.1 copyright (c) 2019 Vossi. All rights reserved.
 
 // removes all lxxxx: labels in first position of line, if no branch or jmp/jsr uses it.
@@ -40,10 +40,10 @@ int main(int argc,char *argv[])
     } 
   if(n==argc)  
   {
-    fprintf(stderr,"dasm6502-rul v1.1 by Vossi 02/2019\n");
+    fprintf(stderr,"dasm6502-rul v1.1 by Vossi 03/2019\n");
     fprintf(stderr,"removes unused labels from dasm6502a disassembling for acme reassembling\n");
     fprintf(stderr,"usage: %s [-xab] .a-file[w/o extension]\n",argv[0]);
-    fprintf(stderr,"  -xab - replaces all $axxx with lbxxx;)\n");
+    fprintf(stderr,"  -xab - replaces all $xxxx addresses with lxxxx from &axxx - $bxxx ;)\n");
     return(1);
   }
   
