@@ -1,7 +1,8 @@
 // dasm6502-rul.c
 // removes unused labels from dasm6502a disassembling for acme reassembling
 // written by Vossi 03/2019 in Hamburg/Germany
-// version 1.1 copyright (c) 2019 Vossi. All rights reserved.
+// fixed 10/2023 - removed false extra tab
+// version 1.2 copyright (c) 2023 Vossi. All rights reserved.
 
 // removes all lxxxx: labels in first position of line, if no branch or jmp/jsr uses it.
 // option -xab to replace all $xxxx addresses with lxxxx from &axxx - $bxxx
@@ -25,8 +26,8 @@ int main(int argc,char *argv[])
   char targetext[8]="_rul.a";
   char a, b;
 
-  byte buf[10000][160];
-  byte label[10000][5];
+  byte buf[32000][160];
+  byte label[32000][5];
   
   for(n=1;(n<argc)&&(*argv[n]=='-');n++)  // loop for argc>1 & starting with -
     switch(argv[n][1])                    // check first character
@@ -40,7 +41,7 @@ int main(int argc,char *argv[])
     } 
   if(n==argc)  
   {
-    fprintf(stderr,"dasm6502-rul v1.1 by Vossi 03/2019\n");
+    fprintf(stderr,"dasm6502-rul v1.2 by Vossi 10/2023\n");
     fprintf(stderr,"removes unused labels from dasm6502a disassembling for acme reassembling\n");
     fprintf(stderr,"usage: %s [-xab] .a-file[w/o extension]\n",argv[0]);
     fprintf(stderr,"  -xab - replaces all $xxxx addresses with lxxxx from &axxx - $bxxx ;)\n");
@@ -170,13 +171,12 @@ else  strcat(target,targetext);
         } while(ok == 0 && j < labels);
         if(ok == 0)
         {
-          buf[i][0] = 0x09;                   // replace first char with tab
-          j = 1;
+          j = 0;                              // remove 6 chars "lxxxx:"
           do
           {
-            buf[i][j] = buf[i][j+5];
+            buf[i][j] = buf[i][j+6];
             j++;
-          } while(buf[i][j+4] != 0x0a);
+          } while(buf[i][j+5] != 0x0a);
         }
       }
     }
