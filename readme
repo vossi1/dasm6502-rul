@@ -1,10 +1,11 @@
-rul.c
-removes unused labels from dasm6502a disassembling for acme
-written by Vossi 02/2019 in Hamburg/Germany
+dasm6502-rul.c
+removes unused labels from dasm6502a disassembling for acme reassembling
+written by Vossi 03/2019 in Hamburg/Germany
+fixed 10/2023 - removed false extra tab
 version 1.2 copyright (c) 2023 Vossi. All rights reserved.
-- 1.2 fix: removed one extra tab  
 
 removes all lxxxx: labels in first position of line, if no branch or jmp/jsr uses it.
-option -xab to replace all $xxxx addresses with lxxxx from $axxx - $bxxx
+option -xab to replace all $xxxx addresses with lxxxx from &axxx - $bxxx
 
-DASM6502A is a special version which creates an ACME compatible disassembling!
+1.step: Replace $xxxx labels of jmp, jsr, lda... in code area xab with lxxxx -> _rep file output
+2.step: remove unused labels in _rep file -> _rep_rul output

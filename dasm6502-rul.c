@@ -6,7 +6,9 @@
 
 // removes all lxxxx: labels in first position of line, if no branch or jmp/jsr uses it.
 // option -xab to replace all $xxxx addresses with lxxxx from &axxx - $bxxx
-
+//
+// 1.step: Replace $xxxx labels of jmp, jsr, lda... in code area xab with lxxxx -> _rep file output
+// 2.step: remove unused labels in _rep file -> _rep_rul output
 
 #include <stdio.h>
 #include <string.h>
